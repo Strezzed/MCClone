@@ -48,4 +48,6 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '26.0-jre'
     compileOnly 'org.projectlombok:lombok:1.18.2'
     apt "org.projectlombok:lombok:1.18.2"
+    compile group: 'org.joml', name: 'joml', version: '1.9.11'
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.11'
 }

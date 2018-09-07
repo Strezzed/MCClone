@@ -1,5 +1,5 @@
 /*******************************************************************************
- * MCClone a Minecraft Clone
+ * Minecraft a Minecraft Clone
  * Copyright (C) 2018  Keir Davis
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,28 +18,46 @@
 
 package org.strezz.mcclone;
 
+import lombok.Getter;
 import org.pmw.tinylog.Configurator;
+import org.pmw.tinylog.Logger;
 import org.pmw.tinylog.writers.ConsoleWriter;
 import org.pmw.tinylog.writers.FileWriter;
+import org.strezz.mcclone.game.GameLogicHandler;
 import org.strezz.mcclone.window.Window;
 
-public final class MCClone {
+public final class Minecraft {
 
-    private static Window window;
+    public static Minecraft mc;
+
+    @Getter
+    private Window window;
+
+    @Getter
+    private GameLogicHandler logicHandler;
+
+    @Getter
+    private Loops loops;
 
     public static void main(String[] args) {
         createLogger(true, true);
-
-        window = new Window(1280, 720, "MC Clone", false);
-        window.openWindow();
-
-        while (!window.shouldClose()) {
-            window.perLoop();
-        }
-        window.destory();
+        Logger.info("Starting Minecraft");
+        mc = new Minecraft();
+        mc.start();
+        Logger.info("Game Ended!");
     }
 
-    public static void createLogger(boolean fileLogging, boolean consoleLogging) {
+    private void start() {
+        logicHandler = new GameLogicHandler();
+        logicHandler.loadLogic();
+
+        window = new Window(1280, 720, "", false);
+        loops = new Loops();
+        loops.startGame(window);
+    }
+
+
+    private static void createLogger(boolean fileLogging, boolean consoleLogging) {
         if (!fileLogging && !consoleLogging) {
             return;
         }
@@ -55,7 +73,7 @@ public final class MCClone {
             logConfigurator.addWriter(new ConsoleWriter());
         }
 
-        logConfigurator.formatPattern("[GAME] {date:dd-MM-YYYY HH:mm:ss} [{thread}] {level}: {message}");
+        logConfigurator.formatPattern("[MC] {date:dd-MM-YYYY HH:mm:ss} [{thread}] {level}: {message}");
         logConfigurator.activate();
     }
 

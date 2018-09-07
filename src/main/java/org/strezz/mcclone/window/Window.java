@@ -1,5 +1,5 @@
 /*******************************************************************************
- * MCClone a Minecraft Clone
+ * Minecraft a Minecraft Clone
  * Copyright (C) 2018  Keir Davis
  *
  * This program is free software: you can redistribute it and/or modify
@@ -58,9 +58,9 @@ public class Window {
         this.height = height;
         this.windowTitle = windowTitle;
         this.vSync = vSync;
+    }
 
-        initGLFW();
-
+    public void createWindow() {
         windowID = glfwCreateWindow(width, height, windowTitle, MemoryUtil.NULL, MemoryUtil.NULL);
         if (windowID == MemoryUtil.NULL) {
             throw new RuntimeException("GLFW window could not be created!");
@@ -75,13 +75,12 @@ public class Window {
         centerOnScreen();
 
         Logger.info("Window Created");
-
     }
 
     /**
      * Initialize GLFW
      */
-    private void initGLFW() {
+    public void initGLFW() {
         GLFWErrorCallback.createPrint(System.err).set();
 
         if (!glfwInit()) {
@@ -113,6 +112,10 @@ public class Window {
      */
     public boolean shouldClose() {
         return glfwWindowShouldClose(windowID);
+    }
+
+    public void setWindowTitle(String title) {
+        glfwSetWindowTitle(windowID, title);
     }
 
     /**
