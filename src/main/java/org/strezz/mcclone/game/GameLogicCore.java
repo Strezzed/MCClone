@@ -24,6 +24,8 @@ import org.lwjgl.opengl.GL11;
 import org.pmw.tinylog.Logger;
 import org.strezz.mcclone.Minecraft;
 import org.strezz.mcclone.input.InputHandler;
+import org.strezz.mcclone.render.Renderer;
+import org.strezz.mcclone.utils.IconUtils;
 import org.strezz.mcclone.window.Window;
 
 import java.text.NumberFormat;
@@ -31,6 +33,7 @@ import java.text.NumberFormat;
 public class GameLogicCore implements IGameLogic {
 
     private InputHandler input;
+    private Renderer renderer;
 
     @Override
     public void gameInit() {
@@ -55,6 +58,14 @@ public class GameLogicCore implements IGameLogic {
         Logger.info("OpenGL:" + GL11.glGetString(GL11.GL_VERSION));
         Logger.info("");
 
+        try {
+            IconUtils.setIcon("minecraft/textures/misc/icon.png", window);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        renderer = new Renderer();
+        renderer.init();
         input = new InputHandler();
         input.renderInit(window);
     }
