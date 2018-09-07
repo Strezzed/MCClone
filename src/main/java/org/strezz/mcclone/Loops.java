@@ -118,7 +118,7 @@ public final class Loops {
         Logger.info("Finished Render Loop.");
     }
 
-    private void stopGame() {
+    public void stopGame() {
         running = false;
     }
 

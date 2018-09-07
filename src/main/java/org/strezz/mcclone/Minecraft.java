@@ -56,6 +56,10 @@ public final class Minecraft {
         loops.startGame(window);
     }
 
+    public void stopGame(){
+        loops.stopGame();
+    }
+
 
     private static void createLogger(boolean fileLogging, boolean consoleLogging) {
         if (!fileLogging && !consoleLogging) {

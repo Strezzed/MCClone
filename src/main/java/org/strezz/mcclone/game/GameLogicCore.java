@@ -19,15 +19,18 @@
 package org.strezz.mcclone.game;
 
 import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import org.pmw.tinylog.Logger;
 import org.strezz.mcclone.Minecraft;
+import org.strezz.mcclone.input.InputHandler;
 import org.strezz.mcclone.window.Window;
 
 import java.text.NumberFormat;
 
 public class GameLogicCore implements IGameLogic {
 
+    private InputHandler input;
 
     @Override
     public void gameInit() {
@@ -52,11 +55,18 @@ public class GameLogicCore implements IGameLogic {
         Logger.info("OpenGL:" + GL11.glGetString(GL11.GL_VERSION));
         Logger.info("");
 
+        input = new InputHandler();
+        input.renderInit(window);
     }
 
     @Override
     public void renderUpdate(Window window) {
+        if (input.keyUp(GLFW.GLFW_KEY_ESCAPE)) {
+            Minecraft.mc.stopGame();
+        }
+
         window.setWindowTitle(buildWindowTitle(window));
+
     }
 
     @Override
