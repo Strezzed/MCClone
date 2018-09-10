@@ -30,17 +30,14 @@ import java.nio.IntBuffer;
 
 public class Mesh {
 
-    @Getter
-    @Setter
-    private ShaderProgram shader;
-
     private final float[] verts;
     private final int[] tris;
     private final float[] uv;
-
     @Getter
     private final Texture texture;
-
+    @Getter
+    @Setter
+    private ShaderProgram shader;
     private int coordVao;
     private int coordVbo;
     private int triVbo;

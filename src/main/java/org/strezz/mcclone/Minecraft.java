@@ -47,20 +47,6 @@ public final class Minecraft {
         Logger.info("Game Ended!");
     }
 
-    private void start() {
-        logicHandler = new GameLogicHandler();
-        logicHandler.loadLogic();
-
-        window = new Window(1280, 720, "", false);
-        loops = new Loops();
-        loops.startGame(window);
-    }
-
-    public void stopGame(){
-        loops.stopGame();
-    }
-
-
     private static void createLogger(boolean fileLogging, boolean consoleLogging) {
         if (!fileLogging && !consoleLogging) {
             return;
@@ -79,6 +65,19 @@ public final class Minecraft {
 
         logConfigurator.formatPattern("[MC] {date:dd-MM-YYYY HH:mm:ss} [{thread}] {level}: {message}");
         logConfigurator.activate();
+    }
+
+    private void start() {
+        logicHandler = new GameLogicHandler();
+        logicHandler.loadLogic();
+
+        window = new Window(1280, 720, "", false);
+        loops = new Loops();
+        loops.startGame(window);
+    }
+
+    public void stopGame() {
+        loops.stopGame();
     }
 
 

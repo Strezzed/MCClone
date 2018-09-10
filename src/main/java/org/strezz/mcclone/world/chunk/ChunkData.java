@@ -36,6 +36,10 @@ public class ChunkData {
         blocks = new Block[CHUNK_SIZE][CHUNK_SIZE][CHUNK_SIZE];
     }
 
+    public static boolean inChunk(int x, int y, int z) {
+        return x >= 0 && y >= 0 && z >= 0 && x < CHUNK_SIZE && y < CHUNK_SIZE && z < CHUNK_SIZE;
+    }
+
     public void setBlockAt(int x, int y, int z, Block block) {
         if (inChunk(x, y, z)) {
             blocks[x][y][z] = block;
@@ -49,10 +53,6 @@ public class ChunkData {
             return blocks[x][y][z];
         }
         return null;
-    }
-
-    public static boolean inChunk(int x, int y, int z) {
-        return x >= 0 && y >= 0 && z >= 0 && x < CHUNK_SIZE && y < CHUNK_SIZE && z < CHUNK_SIZE;
     }
 
 

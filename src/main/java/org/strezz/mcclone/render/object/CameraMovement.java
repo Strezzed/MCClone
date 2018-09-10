@@ -20,7 +20,6 @@ package org.strezz.mcclone.render.object;
 
 import lombok.Getter;
 import org.joml.Vector2d;
-import org.joml.Vector3d;
 import org.joml.Vector3f;
 import org.lwjgl.glfw.GLFW;
 import org.strezz.mcclone.input.InputHandler;

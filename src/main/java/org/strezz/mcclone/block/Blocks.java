@@ -20,9 +20,8 @@ package org.strezz.mcclone.block;
 
 public class Blocks {
 
-    private static boolean init = false;
-
     public static Block blockStone;
+    private static boolean init = false;
 
     public static void init() {
         if (!init) {
