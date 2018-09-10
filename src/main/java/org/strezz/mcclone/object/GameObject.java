@@ -19,7 +19,9 @@
 package org.strezz.mcclone.object;
 
 import lombok.Getter;
+import lombok.Setter;
 import org.joml.Vector3f;
+import org.strezz.mcclone.render.object.Mesh;
 
 /**
  * Placeholder
@@ -27,9 +29,54 @@ import org.joml.Vector3f;
 public final class GameObject {
 
     @Getter
-    private final Vector3f position = new Vector3f();
+    @Setter
+    private Vector3f position = new Vector3f();
+
     @Getter
-    private final Vector3f rotation = new Vector3f();
+    @Setter
+    private Vector3f rotation = new Vector3f();
+
     @Getter
+    @Setter
     private float scale;
+
+    @Getter
+    @Setter
+    private Mesh mesh;
+
+    public GameObject(Vector3f position, Vector3f rotation, float scale, Mesh mesh) {
+        if (position != null) setPosition(position);
+        if (rotation != null) setRotation(rotation);
+        setScale(scale);
+        setMesh(mesh);
+    }
+
+    public GameObject(Vector3f position, Vector3f rotation, Mesh mesh) {
+        this(position, rotation, 1.0f, mesh);
+    }
+
+    public GameObject(Vector3f position, Mesh mesh) {
+        this(position, null, 1.0f, mesh);
+    }
+
+    public GameObject(Mesh mesh) {
+        this(null, null, 1.0f, mesh);
+    }
+
+    public void render() {
+        if (mesh != null) {
+            if (!mesh.isBuilt()) {
+                mesh.build();
+            }
+            mesh.render();
+        }
+    }
+
+    public void renderCleanup() {
+        if (mesh != null) {
+            mesh.cleanup();
+        }
+    }
+
+
 }
